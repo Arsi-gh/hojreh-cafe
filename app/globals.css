@@ -1,33 +1,58 @@
+@import url("./../public/fonts/font.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    & {
+      --color-primary-600: rgb(117, 100, 80);
+      --color-primary-500: 100, 83, 63;
+      --color-primary-400: 117, 100, 80;
+
+      --color-secondary-600: 141, 114, 79;
+      --color-secondary-500: 255, 248, 237;
+      --color-secondary-400: 255, 249, 240;
+      --color-secondary-300: 255, 251, 245;
+
+      --color-teritary-600: 142, 128, 106;
+      --color-teritary-500: 1, 143, 204;
+      --color-teritary-400: 255, 249, 240;
+
+    }
+  }
+
+  body {
+    @apply text-primary-500 bg-secondary-400;
+  }
+
+  .category-icon {
+    @apply text-teritary-500 md:text-2xl text-xl ml-1
+  }
+
+  .btn-behavior , button {
+    @apply transition-all active:scale-95
+  }
+
+  input {
+    @apply p-2 border rounded-lg bg-white outline-none transition-all focus:border-secondary-600 focus:border-opacity-60 focus:shadow-xl
   }
 }
 
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  padding: 0;
+  margin: 0;
+  font-family: "Badr";
+  direction: rtl;
+  scroll-behavior: smooth;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.scroll-tag{
+  scroll-margin-top: 200px;
+}
+
+#nprogress .spinner-icon {
+  display: none !important;
 }
