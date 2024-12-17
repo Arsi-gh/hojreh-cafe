@@ -19,12 +19,10 @@ export default function Item({item}) {
     setActiveItem(item)
   }
 
-  const addItem = (e , id) => {
+  const addItem = (e , id , desc , price) => {
     e.stopPropagation()
     if (options) {
-      if (+e.target.previousSibling.innerText){
-        dispatch({type : "add" , payload : {id , name , desc : e.target.previousSibling.previousSibling.previousSibling.innerText , price : +e.target.previousSibling.innerText}})
-      }
+      dispatch({type : "add" , payload : {id , name , desc , price : +price}})
     } else {
       dispatch({type : "add" , payload : {id , name , price}})
     }
@@ -41,7 +39,7 @@ export default function Item({item}) {
           {desc && <p className="w-full md:text-xl text-base text-justify max-md:w-full text-primary-400 text-opacity-70">{desc}</p>}
         </div>
       </div> 
-        {!options && basket.find(item => item.name === name) ? <ItemQuanitity id={item.id} name={name} desc={desc} price={price}/> : !options &&  <button onClick={(e) => addItem(e , id)} className="w-fit p-2 rounded-lg shadow-md border flex items-center gap-x-2 self-end"><p>افزودن به سبد خرید</p><TbShoppingCartPlus className="text-xl"/></button>}
+        {!options && basket.find(item => item.name === name) ? <ItemQuanitity id={item.id} name={name} desc={desc} price={price}/> : !options &&  <button onClick={(e) => addItem(e , id , desc , price)} className="w-fit p-2 rounded-lg shadow-md border flex items-center gap-x-2 self-end"><p>افزودن به سبد خرید</p><TbShoppingCartPlus className="text-xl"/></button>}
         {
           options && (
             <div className="space-y-2 w-full mt-3 text-lg">
@@ -54,7 +52,7 @@ export default function Item({item}) {
                     {
                       basket.find(item => item.desc === opt.key && item.name === name) ? 
                       <ItemQuanitity id={id  + opt.id} name={name} desc={opt.key} price={opt.value}/>
-                      :<TbShoppingCartPlus onClick={(e) => addItem(e , id + opt.id)} className="p-2 rounded-lg shadow-lg border text-4xl"/>
+                      :<TbShoppingCartPlus onClick={(e) => addItem(e , id + opt.id , opt.key , opt.value)} className="p-2 rounded-lg shadow-lg border text-4xl"/>
                     }
                   </span>
                 )
